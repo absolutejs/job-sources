@@ -1,0 +1,16 @@
+{
+  "contract": 1,
+  "name": "@absolutejs/job-sources",
+  "releases": [
+    {
+      "version": "0.1.0",
+      "date": "2026-11-05",
+      "changes": [
+        {
+          "kind": "added",
+          "summary": "Public Greenhouse, Lever and Ashby board adapters with bounded retrieval, source provenance and explicit partial outcomes."
+        }
+      ]
+    }
+  ]
+}
