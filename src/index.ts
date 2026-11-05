@@ -97,6 +97,30 @@ export const validateJobBoard = (input: JobBoard): JobBoard => {
     ...(input.provider === "lever" ? { region: input.region ?? "global" } : {}),
   };
 };
+/** Recognize a hosted careers/job URL without fetching it or following redirects.
+ * Returns null for custom domains, unsupported hosts and malformed identifiers. */
+export const parseJobBoardUrl = (input: string): JobBoard | null => {
+  if (typeof input !== "string" || input.length > 4096) return null;
+  try {
+    const parsed = new URL(input.trim());
+    if (parsed.protocol !== "https:" || parsed.username || parsed.password || parsed.port) return null;
+    const host = parsed.hostname;
+    let provider: JobProvider;
+    let region: "global" | "eu" | undefined;
+    if (host === "boards.greenhouse.io" || host === "job-boards.greenhouse.io") provider = "greenhouse";
+    else if (host === "jobs.lever.co" || host === "jobs.eu.lever.co") {
+      provider = "lever";
+      region = host === "jobs.eu.lever.co" ? "eu" : "global";
+    } else if (host === "jobs.ashbyhq.com") provider = "ashby";
+    else return null;
+    const segments = parsed.pathname.split("/");
+    const board = provider === "greenhouse" && segments[1] === "embed" && ["job_board", "job_app"].includes(segments[2] ?? "")
+      ? parsed.searchParams.get("for") : segments[1];
+    if (!board || board === "embed") return null;
+    return validateJobBoard({provider, board, ...(region ? {region} : {})});
+  } catch { return null; }
+};
+
 export const jobBoardKey = (input: JobBoard) => {
   const board = validateJobBoard(input);
   return `${board.provider}:${board.region ?? "global"}:${board.board}`;

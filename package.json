@@ -1,6 +1,6 @@
 {
   "name": "@absolutejs/job-sources",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Public career-board adapters with normalized listings and explicit completeness",
   "license": "BSL-1.1",

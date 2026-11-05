@@ -1,16 +1,26 @@
 {
-  "contract": 1,
-  "name": "@absolutejs/job-sources",
-  "releases": [
-    {
-      "version": "0.1.0",
-      "date": "2026-11-05",
-      "changes": [
-        {
-          "kind": "added",
-          "summary": "Public Greenhouse, Lever and Ashby board adapters with bounded retrieval, source provenance and explicit partial outcomes."
-        }
-      ]
-    }
-  ]
+	"contract": 1,
+	"name": "@absolutejs/job-sources",
+	"releases": [
+		{
+			"changes": [
+				{
+					"kind": "added",
+					"summary": "Recognize supported hosted careers and job URLs as validated board sources without network access."
+				}
+			],
+			"date": "2026-11-05",
+			"version": "0.2.0"
+		},
+		{
+			"changes": [
+				{
+					"kind": "added",
+					"summary": "Public Greenhouse, Lever and Ashby board adapters with bounded retrieval, source provenance and explicit partial outcomes."
+				}
+			],
+			"date": "2026-11-05",
+			"version": "0.1.0"
+		}
+	]
 }

@@ -44,3 +44,18 @@ an Apache-2.0 change license; see LICENSE.
 
 Verified November 5, 2026. Live provider payloads can change; malformed results
 remain explicit failures rather than an empty feed.
+
+## Recognize a hosted careers URL
+
+```ts
+import { parseJobBoardUrl } from "@absolutejs/job-sources";
+const board = parseJobBoardUrl("https://jobs.eu.lever.co/example/job-id");
+// { provider: "lever", board: "example", region: "eu" }
+```
+
+The parser recognizes HTTPS Greenhouse, Lever and Ashby hosted board/job URLs,
+including Greenhouse `embed/job_board?for=...` links. It makes no network request,
+retains board case and Lever region, and returns `null` for custom domains,
+credentials, non-default ports or invalid identifiers. Recognition does not verify
+that a board exists or that a particular job is still open; use the bounded feed
+adapter to check its published listings.
